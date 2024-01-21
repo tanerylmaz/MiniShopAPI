@@ -8,7 +8,6 @@ namespace MiniShop.Data.Abstract
 		Task<TEntity> CreateAsync(TEntity entity);
 		void Update(TEntity entity);
 		void HardDelete(TEntity entity);
-		void SoftDelete(TEntity entity);
     }
 }
 
