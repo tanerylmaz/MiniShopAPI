@@ -3,7 +3,7 @@ namespace MiniShop.Entity.Abstract
 {
 	public abstract class BaseEntity
 	{
-		public string Id { get; set; }
+		public int Id { get; set; }
 		public DateTime CreatedDate { get; set; } = DateTime.Now;
 		public DateTime ModifiedDate { get; set; } = DateTime.Now;
 		public string Name { get; set; }

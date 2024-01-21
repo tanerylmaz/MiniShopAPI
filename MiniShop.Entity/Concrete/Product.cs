@@ -8,6 +8,7 @@ namespace MiniShop.Entity.Concrete
 		public decimal Price { get; set; }
 		public string Properties { get; set; }
 		public string ImageUrl { get; set; }
+		public bool IsHome { get; set; }
 		public List<ProductCategory> ProductCategories { get; set; }
 	}
 }
