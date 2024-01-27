@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniShop.Data.Abstract;
 using MiniShop.Data.Concrete.Context;
+using MiniShop.Data.Concrete.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<MiniShopDbContext>(options=>
 options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"))
 );
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 builder.Services.AddEndpointsApiExplorer();

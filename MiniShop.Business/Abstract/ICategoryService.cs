@@ -1,13 +1,25 @@
 ﻿using System;
+using MiniShop.Shared.DTOs.Category;
+
 namespace MiniShop.Business.Abstract
 {
 	public interface ICategoryService
 	{
         #region Generic
-        Task<>
+
+        Task<CategoryDTO> GetByIdAsync(int id);
+        Task<List<CategoryDTO>> GetAllAsync();
+        Task<CategoryDTO> CreateAsync(CategoryDTO categoryDTO);
+        Task<CategoryDTO> UpdateAsync(CategoryDTO categoryDTO);
+        Task HardDeleteAsync(int id);
+        Task SoftDeleteAsync(int id);
+
         #endregion
 
         #region Category
+
+        Task<List<CategoryDTO>> GetAllCategoriesWithProductsAsync();
+
         #endregion
     }
 }
