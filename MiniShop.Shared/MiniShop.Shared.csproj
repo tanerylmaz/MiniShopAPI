@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="DTOs\" />
+    <None Remove="DTOs\Product\" />
+    <None Remove="DTOs\Category\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Product\" />
+    <Folder Include="DTOs\Category\" />
+  </ItemGroup>
 </Project>

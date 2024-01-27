@@ -10,4 +10,12 @@
     <ProjectReference Include="..\MiniShop.Data\MiniShop.Data.csproj" />
     <ProjectReference Include="..\MiniShop.Shared\MiniShop.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Abstract\" />
+    <None Remove="Concrete\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+    <Folder Include="Concrete\" />
+  </ItemGroup>
 </Project>

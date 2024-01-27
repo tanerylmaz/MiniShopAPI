@@ -7,7 +7,7 @@ namespace MiniShop.Data.Abstract
 	{
         Task<List<Product>> GetAllProductsWithCategoriesAsync();
         Task<List<Product>> GetProductsByCategoryIdAsync(int categoryId);
-        Task<Product> GetProductWithCategoriesAsync();
+        Task<Product> GetProductWithCategoriesAsync(int id);
 
     }
 }
