@@ -24,7 +24,13 @@ namespace MiniShop.Shared.ResponseDTOs
 			};
 		}
 
-		public static Response<T> Success(int statusCode)
+
+        /// <summary>
+        /// Bu metot, işlemin başarılı oldugunu ifade eden bir status code döndürmek için kullanılır.
+        /// </summary>
+        /// <param name="statusCode">İşlemin sonucunu ifade eden kod</param>
+        /// <returns>Response<typeparamref name="T"/></returns>
+        public static Response<T> Success(int statusCode)
 		{
 			return new Response<T>
 			{
@@ -33,6 +39,36 @@ namespace MiniShop.Shared.ResponseDTOs
 				IsSucceeded=true
 			};
 		}
-	}
+        /// <summary>
+        /// Bu metot geriye başarısız bir cevap olarak hata listesini döndürmek için kullanılır
+        /// </summary>
+        /// <param name="errors">Hata listesi</param>
+        /// <param name="statusCode">İşlem sonucu ifade eden kod</param>
+        /// <returns>Response<typeparamref name="T"/></returns>
+        public static Response<T> Fail(List<string> errors, int statusCode)
+		{
+			return new Response<T>
+			{
+				Errors=errors,
+				StatusCode=statusCode,
+				IsSucceeded=false
+			};
+		}
+		/// <summary>
+		/// Bu metot geriye başarısız bir cevap olarak içinde bir hata olan hata listesini döndürmek için kullanılır
+		/// </summary>
+		/// <param name="error">Hata metni</param>
+		/// <param name="statusCode">İşlem sonucu ifade eden kod</param>
+		/// <returns>Response<typeparamref name="T"/></returns>
+        public static Response<T> Fail(string error, int statusCode)
+        {
+            return new Response<T>
+            {
+                Errors = new List<string> { error},
+                StatusCode = statusCode,
+                IsSucceeded = false
+            };
+        }
+    }
 }
 

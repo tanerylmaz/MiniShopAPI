@@ -3,6 +3,7 @@ using AutoMapper;
 using MiniShop.Business.Abstract;
 using MiniShop.Data.Abstract;
 using MiniShop.Shared.DTOs.Category;
+using MiniShop.Shared.ResponseDTOs;
 
 namespace MiniShop.Business.Concrete
 {
@@ -17,37 +18,50 @@ namespace MiniShop.Business.Concrete
             _repository = repository;
         }
 
-        public Task<CategoryDTO> CreateAsync(CategoryDTO categoryDTO)
+        public Task<Response<CategoryDTO>> CreateAsync(CategoryDTO categoryDTO)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CategoryDTO>> GetAllAsync()
+        public async Task<Response<List<CategoryDTO>>> GetAllAsync()
+        {
+            var categoryList = await _repository.GetAllAsync();
+            if (categoryList==null)
+            {
+                return Response<List<CategoryDTO>>.Fail("Hiç kategori bulunamadı.", 301);
+            }
+            var categoryDtoList = _mapper.Map<List<CategoryDTO>>(categoryList);
+            return Response<List<CategoryDTO>>.Success(categoryDtoList, 200);
+            
+        }
+
+        public async Task<Response<List<CategoryDTO>>> GetAllCategoriesWithProductsAsync()
+        {
+            var categoryList = await _repository.GetAllCategoriesWithProductsAsync();
+            if (categoryList==null)
+            {
+                return Response<List<CategoryDTO>>.Fail("kategori bulunamadı",301);
+            }
+            var categoryDtoList = _mapper.Map<List<CategoryDTO>>(categoryList);
+            return Response<List<CategoryDTO>>.Success(categoryDtoList,200);
+        }
+
+        public Task<Response<CategoryDTO>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<CategoryDTO>> GetAllCategoriesWithProductsAsync()
+        public Task<Response<NoContent>> HardDeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<CategoryDTO> GetByIdAsync(int id)
+        public Task<Response<NoContent>> SoftDeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task HardDeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SoftDeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<CategoryDTO> UpdateAsync(CategoryDTO categoryDTO)
+        public Task<Response<CategoryDTO>> UpdateAsync(CategoryDTO categoryDTO)
         {
             throw new NotImplementedException();
         }

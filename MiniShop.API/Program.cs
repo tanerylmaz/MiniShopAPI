@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniShop.Business.Abstract;
+using MiniShop.Business.Concrete;
 using MiniShop.Data.Abstract;
 using MiniShop.Data.Concrete.Context;
 using MiniShop.Data.Concrete.Repositories;
@@ -14,6 +16,7 @@ options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"))
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
