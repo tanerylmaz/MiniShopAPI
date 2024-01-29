@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MiniShop.Business.Abstract;
 
 namespace MiniShop.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
+   // [Route("[controller]/[action]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -18,11 +20,29 @@ namespace MiniShop.API.Controllers
             _categoryManager = categoryManager;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllCategories()
+        [HttpGet("getall")]
+        public async Task<IActionResult> GetAll()
         {
             var response = await _categoryManager.GetAllAsync();
-            return null;
+            var jsonResponse = JsonSerializer.Serialize(response);
+            return Ok(jsonResponse);
+        }
+
+
+        [HttpGet("getwithproducts")]
+        public async Task<IActionResult> GetWithProducts()
+        {
+            var response = await _categoryManager.GetAllCategoriesWithProductsAsync();
+            var result = JsonSerializer.Serialize(response);
+            return Ok(result);
+        }
+
+        [HttpGet("getbyid/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var response = await _categoryManager.GetByIdAsync(id);
+            var jsonresp = JsonSerializer.Serialize(response);
+            return Ok(jsonresp);
         }
     }
 }

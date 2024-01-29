@@ -12,7 +12,7 @@ namespace MiniShop.Business.Abstract
 
         Task<Response<List<CategoryDTO>>> GetAllAsync();
 
-        Task<Response<CategoryDTO>> CreateAsync(CategoryDTO categoryDTO);
+        Task<Response<CategoryDTO>> CreateAsync(AddCategoryDTO addCategoryDTO);
 
         Task<Response<CategoryDTO>> UpdateAsync(CategoryDTO categoryDTO);
 

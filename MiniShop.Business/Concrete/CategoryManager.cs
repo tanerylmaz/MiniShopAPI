@@ -2,6 +2,7 @@
 using AutoMapper;
 using MiniShop.Business.Abstract;
 using MiniShop.Data.Abstract;
+using MiniShop.Entity.Concrete;
 using MiniShop.Shared.DTOs.Category;
 using MiniShop.Shared.ResponseDTOs;
 
@@ -18,9 +19,14 @@ namespace MiniShop.Business.Concrete
             _repository = repository;
         }
 
-        public Task<Response<CategoryDTO>> CreateAsync(CategoryDTO categoryDTO)
+        public async Task<Response<CategoryDTO>> CreateAsync(AddCategoryDTO addCategoryDTO)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(addCategoryDTO);
+            var createdCategory= await _repository.CreateAsync(category);
+            if (createdCategory == null)
+            {
+                return Response<CategoryDTO>.Fail("Hiç kategori bulunamadı.", 301);
+            }
         }
 
         public async Task<Response<List<CategoryDTO>>> GetAllAsync()
@@ -46,9 +52,15 @@ namespace MiniShop.Business.Concrete
             return Response<List<CategoryDTO>>.Success(categoryDtoList,200);
         }
 
-        public Task<Response<CategoryDTO>> GetByIdAsync(int id)
+        public async Task<Response<CategoryDTO>> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _repository.GetByIdAsync(id);
+            if (category == null)
+            {
+                return Response<CategoryDTO>.Fail("kategori bulunamadı", 404);
+            }
+            var categoryDTO = _mapper.Map<CategoryDTO>(category);
+            return Response<CategoryDTO>.Success(categoryDTO, 200);
         }
 
         public Task<Response<NoContent>> HardDeleteAsync(int id)

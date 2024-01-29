@@ -10,7 +10,9 @@ namespace MiniShop.Business.Mappings
 	{
 		public GeneralMappingProfile()
 		{
-			CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Category, AddCategoryDTO>().ReverseMap();
+
+            CreateMap<Product, ProductDTO>().ReverseMap();
 			CreateMap<Category, CategoryDTO>()
 				.ForMember(cdto=>cdto.ProductList,options=>
 				options.MapFrom(c=>c.ProductCategories.Select(pc=>pc.Product)))
