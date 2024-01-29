@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MiniShop.Business.Abstract;
+using MiniShop.Shared.DTOs.Category;
 
 namespace MiniShop.API.Controllers
 {
@@ -41,6 +42,22 @@ namespace MiniShop.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var response = await _categoryManager.GetByIdAsync(id);
+            var jsonresp = JsonSerializer.Serialize(response);
+            return Ok(jsonresp);
+        }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> Create(AddCategoryDTO addCategoryDTO)
+        {
+            var response = await _categoryManager.CreateAsync(addCategoryDTO);
+            var jsonresp = JsonSerializer.Serialize(response);
+            return Ok(jsonresp);
+        }
+
+        [HttpPut("update")] //güncelleme işlemlerinde kullanılır
+        public async Task<IActionResult> Update(EditCategoryDTO editCategoryDTO)
+        {
+            var response = await _categoryManager.UpdateAsync(editCategoryDTO);
             var jsonresp = JsonSerializer.Serialize(response);
             return Ok(jsonresp);
         }

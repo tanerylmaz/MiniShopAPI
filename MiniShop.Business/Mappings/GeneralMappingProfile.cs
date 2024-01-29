@@ -11,6 +11,7 @@ namespace MiniShop.Business.Mappings
 		public GeneralMappingProfile()
 		{
             CreateMap<Category, AddCategoryDTO>().ReverseMap();
+            CreateMap<Category, EditCategoryDTO>().ReverseMap();
 
             CreateMap<Product, ProductDTO>().ReverseMap();
 			CreateMap<Category, CategoryDTO>()

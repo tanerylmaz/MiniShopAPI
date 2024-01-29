@@ -25,8 +25,10 @@ namespace MiniShop.Business.Concrete
             var createdCategory= await _repository.CreateAsync(category);
             if (createdCategory == null)
             {
-                return Response<CategoryDTO>.Fail("Hiç kategori bulunamadı.", 301);
+                return Response<CategoryDTO>.Fail("kategori oluşturulamadı.", 301);
             }
+            var createdcategoryDto = _mapper.Map<CategoryDTO>(createdCategory);
+            return Response<CategoryDTO>.Success(createdcategoryDto,200);
         }
 
         public async Task<Response<List<CategoryDTO>>> GetAllAsync()
@@ -73,9 +75,19 @@ namespace MiniShop.Business.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<Response<CategoryDTO>> UpdateAsync(CategoryDTO categoryDTO)
+        public async Task<Response<CategoryDTO>> UpdateAsync(EditCategoryDTO editCategoryDTO)
         {
-            throw new NotImplementedException();
+            var editedCategory = _mapper.Map<Category>(editCategoryDTO);
+            if (editedCategory == null)
+            {
+                return Response<CategoryDTO>.Fail("kategori bulunamadı", 404);
+            }
+
+            editedCategory.ModifiedDate = DateTime.Now;
+            await _repository.UpdateAsync(editedCategory);
+            var resultCategoryDto = _mapper.Map<CategoryDTO>(editedCategory);
+            return Response<CategoryDTO>.Success(resultCategoryDto, 200);
+
         }
     }
 }

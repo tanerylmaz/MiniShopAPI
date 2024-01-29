@@ -6,8 +6,8 @@ namespace MiniShop.Data.Abstract
 		Task<TEntity> GetByIdAsync(int id);
 		Task<List<TEntity>> GetAllAsync();
 		Task<TEntity> CreateAsync(TEntity entity);
-		void Update(TEntity entity);
-		void HardDelete(TEntity entity);
+		Task UpdateAsync(TEntity entity);
+		Task HardDeleteAsync(TEntity entity);
     }
 }
 

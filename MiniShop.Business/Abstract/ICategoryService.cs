@@ -14,7 +14,7 @@ namespace MiniShop.Business.Abstract
 
         Task<Response<CategoryDTO>> CreateAsync(AddCategoryDTO addCategoryDTO);
 
-        Task<Response<CategoryDTO>> UpdateAsync(CategoryDTO categoryDTO);
+        Task<Response<CategoryDTO>> UpdateAsync(EditCategoryDTO editCategoryDTO);
 
         Task<Response<NoContent>> HardDeleteAsync(int id);
 

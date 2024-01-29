@@ -32,16 +32,16 @@ namespace MiniShop.Data.Concrete.Repositories
             return entity;
         }
 
-        public void HardDelete(TEntity entity)
+        public async Task HardDeleteAsync(TEntity entity)
         {
             _dbContext.Set<TEntity>().Remove(entity);
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
         }
 
-        public void Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
         }
     }
 }
