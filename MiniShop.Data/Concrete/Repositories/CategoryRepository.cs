@@ -15,6 +15,12 @@ namespace MiniShop.Data.Concrete.Repositories
         {
             get { return _dbContext as MiniShopDbContext; }
         }
+
+        public Task<List<Category>> GetAllCategoriesActiveDeletedAsync(bool? isActive = null, bool? isDeleted = null)
+        {
+
+        }
+
         public async Task<List<Category>> GetAllCategoriesWithProductsAsync()
         {
             List<Category> categories = await MiniShopDbContext
@@ -24,6 +30,11 @@ namespace MiniShop.Data.Concrete.Repositories
                 .ToListAsync();
 
             return categories;
+        }
+
+        public Task<Category> GetCategoryWithProductsAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

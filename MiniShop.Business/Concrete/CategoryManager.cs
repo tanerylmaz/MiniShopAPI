@@ -83,6 +83,10 @@ namespace MiniShop.Business.Concrete
             {
                 return Response<NoContent>.Fail("kategori bulunamadı", 404);
             }
+            if (deletedCategory.IsDeleted ==true)
+            {
+                return Response<NoContent>.Fail("kategori zaten silinmiş!", 404);
+            }
             deletedCategory.IsDeleted = true;
             deletedCategory.ModifiedDate = DateTime.Now;
             await _repository.UpdateAsync(deletedCategory);
