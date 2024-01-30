@@ -65,14 +65,28 @@ namespace MiniShop.Business.Concrete
             return Response<CategoryDTO>.Success(categoryDTO, 200);
         }
 
-        public Task<Response<NoContent>> HardDeleteAsync(int id)
+        public async Task<Response<NoContent>> HardDeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await _repository.GetByIdAsync(id);
+            if (category == null)
+            {
+                return Response<NoContent>.Fail("kategori bulunamadı", 404);
+            }
+            await _repository.HardDeleteAsync(category);
+            return Response<NoContent>.Success(200);
         }
 
-        public Task<Response<NoContent>> SoftDeleteAsync(int id)
+        public async Task<Response<NoContent>> SoftDeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var deletedCategory = await _repository.GetByIdAsync(id);
+            if (deletedCategory == null)
+            {
+                return Response<NoContent>.Fail("kategori bulunamadı", 404);
+            }
+            deletedCategory.IsDeleted = true;
+            deletedCategory.ModifiedDate = DateTime.Now;
+            await _repository.UpdateAsync(deletedCategory);
+            return Response<NoContent>.Success(200);
         }
 
         public async Task<Response<CategoryDTO>> UpdateAsync(EditCategoryDTO editCategoryDTO)

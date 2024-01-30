@@ -61,6 +61,22 @@ namespace MiniShop.API.Controllers
             var jsonresp = JsonSerializer.Serialize(response);
             return Ok(jsonresp);
         }
+
+        [HttpDelete("harddelete/{id}")]
+        public async Task<IActionResult> HardDelete(int id)
+        {
+            var response = await _categoryManager.HardDeleteAsync(id);
+            var jsonresp = JsonSerializer.Serialize(response);
+            return Ok(jsonresp);
+        }
+
+        [HttpDelete("softdelete/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var response = await _categoryManager.SoftDeleteAsync(id);
+            var jsonresp = JsonSerializer.Serialize(response);
+            return Ok(jsonresp);
+        }
     }
 }
 
